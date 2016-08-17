@@ -23,13 +23,12 @@
                     <div class="col-md-12">
                         <div class="row">
                             <div class="col-md-6">
-                        <div class="table">
-                            <div class='buttons'>
-                                    <a href='modal_new_post.php' class='various_button_new_post fancybox.ajax'>+Добавить</a>
-                                    <a href='modal_update_post.php' class='various_button_post_select fancybox.ajax'>~Редактировать</a>
-                                    <a href='#' class='button_del_post'>-Удалить</a>
+                             <div class='buttons'>
+                                    <button class='button_new_post'>+Добавить</button>
+                                    <button class='button_del_post'>-Удалить</button>
                                     </div>
                                     <form class='form_product' action='model.php' name='table' method='POST'>
+                                        <div class="table">
                                      <table>
                                          <thead>
                                          <th>Год</th>
@@ -50,32 +49,10 @@
                                          <th>на единицу работы</th>
                                          <th>всего</th>
                                          <th>фактически</th>
+                                         <th>Выделить</th>
                                          </thead>
                                          <tbody>
-
-                                         <?php foreach ($question as $row):?>
-                                             <tr id="tr_<?=$row['id'];?>">
-                                                 <td><center><?=$row['id'];?></center></td>
-                                                 <td><?=$row['question'];?></td>
-                                                 <td><?=$row['variant_1'];?></td>
-                                                 <td><?=$row['variant_2'];?></td>
-                                                 <td><?=$row['variant_3'];?></td>
-                                                 <td><?=$row['answer'];?></td>
-                                                 <td><?=$row['answer'];?></td>
-                                                 <td><?=$row['answer'];?></td>
-                                                 <td><?=$row['answer'];?></td>
-                                                 <td><?=$row['answer'];?></td>
-                                                 <td><?=$row['answer'];?></td>
-                                                 <td><?=$row['answer'];?></td>
-                                                 <td><?=$row['answer'];?></td>
-                                                 <td><?=$row['answer'];?></td>
-                                                 <td><?=$row['answer'];?></td>
-                                                 <td><?=$row['answer'];?></td>
-                                                 <td><?=$row['answer'];?></td>
-                                                 <td><?=$row['answer'];?></td>
-                                                 <td><center><input type='checkbox' name='check[]' value='<?=$row['id'];?>'></center></td>
-                                             </tr>
-                                         <?php endforeach;?>
+                                             
                                          </tbody>
 
                                      </table>

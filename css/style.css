@@ -18,3 +18,18 @@ table th, td {
     padding-right: 8px;
     padding-left: 3px;
 }
+.buttons {
+    width: 60%;
+    margin-bottom:10px;
+}
+button.button_new_post {
+    width: 30%;
+    margin-right:5px;
+}
+button.button_del_post {
+    width: 30%;
+    margin-left:5px;
+}
+tbody tr {
+    height: 50px;
+}
