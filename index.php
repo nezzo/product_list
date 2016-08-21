@@ -23,13 +23,24 @@ error_reporting(E_ALL ^E_NOTICE);
                 <div class="row">
                     <div class="col-md-12">
                         <div class="row">
-                            <div class="col-md-6">
+                           
                              <div class='buttons'>
+                                 <div class="col-md-12">
+                                     <div class="row">
+                                         <div class="col-md-6">
                                     <button class='button_new_post'>+Добавить</button>
                                     <button class='button_del_post'>-Удалить</button>
-                                    </div>
+                                         </div>
+                                         <div class="col-md-6">
+                                    <button class='save_downoload'>Сохранить и скачать</button>
+                                    <button class='delete_otchet'>Очистить базу</button>
+                                         </div>
+                                     </div>
+                                 </div>
+                             </div>
+                                <div class="col-md-12">
+                            <div class="table">
                                     <form class='form_product' action='model.php' name='table' method='POST'>
-                                        <div class="table">
                                      <table>
                                          <thead>
                                          <th>Год</th>
@@ -52,14 +63,14 @@ error_reporting(E_ALL ^E_NOTICE);
                                          <th>фактически</th>
                                          <th>Выделить</th>
                                          </thead>
-                                         <tbody>
-                                         </tbody>
+                                         <tbody></tbody>
 
                                      </table>
+                                         
                                     </form>
-                        </div>
-                            </div>
-                        </div>
+                                </div>
+                                </div>      
+                           </div>
                     </div>
                 </div>
             </div>

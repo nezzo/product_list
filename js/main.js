@@ -1,5 +1,6 @@
 //@TODO надо придумать как по двойному щелчку открывать инпут,а теряя фокус выводило значение
-// возможно change  от джейквери нам подойдет      
+//@TODO возможно change  от джейквери нам подойдет 
+//@TODO надо разобраться с приемом данных с таблицы и  отправкой на сервер, принимаю без цыкла, смущает))
 $(document).ready(function(){
     /*
     $(".various_button_new_post,.various_button_post_select").fancybox({
@@ -27,7 +28,18 @@ $(document).ready(function(){
                                 <td><input type="text" name="work_time"> </td><td><input type="text" name="norm_vurabotka"> </td><td><input type="text" name="v_nature"> </td><td><input type="text" name="na_edinitsu"> </td>\n\
                                 <td><input type="text" name="all"> </td><td><input type="text" name="fakt"> </td>\n\
                                 <td><input type="radio" name="delete" value="'+id+'" ></td></tr>');
-            }); 
+   
+      /*Получаем данные с полей и отправляем  на сервер
+       * работает без цыкла но не в перемешку вроде все как надо*/
+       $('.save_downoload').click(function(){
+       var s = $("#tr_"+id+" .year").val();
+      // var d = $("#tr_"+id).val();
+       console.log(id);
+       console.log(s);
+       
+   });        
+   
+   }); 
         
      /*Удаляем выбраные поля*/
    $('.button_del_post').click(function(){
@@ -35,7 +47,5 @@ $(document).ready(function(){
       $("#tr_"+id).remove();
      console.log(id);
    });
-     
-   
-   
+    
 });

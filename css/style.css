@@ -20,7 +20,7 @@ table th, td {
 }
 .buttons {
     width: 60%;
-    margin-bottom:10px;
+    margin-bottom:40px;
 }
 button.button_new_post {
     width: 30%;
@@ -32,4 +32,13 @@ button.button_del_post {
 }
 tbody tr {
     height: 50px;
+}
+button.save_downoload {
+    width: 50%;
+    float: left;
+}
+button.delete_otchet {
+    width: 50%;
+    position: absolute;
+    right: -20px;
 }
