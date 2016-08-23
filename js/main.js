@@ -20,7 +20,7 @@ $(document).ready(function(){
        var date = new Date();
         var id = date.getTime();
        
-      $('.table tbody').append('<tr id="tr_'+id+'"><td><input type="text" class="year" name="year"><span class="errmsg"></span> </td><td><input type="text" name="monts"> </td>\n\
+      $('.table tbody').append('<tr id="tr_'+id+'"><td><input type="text" name="year"></td><td><input type="text" name="monts"> </td>\n\
                                 <td><input type="text" name="sg"> </td><td><input type="text" name="uchet"> </td>\n\
                                 <td><input type="text" name="fio"> </td><td><input type="text" name="tab_number"> </td>\n\
                                 <td><input type="text" name="marka_car"> </td><td><input type="text" name="int_monts"> </td><td><input type="text" name="name_kultura"> </td>\n\
@@ -32,10 +32,61 @@ $(document).ready(function(){
       /*Получаем данные с полей и отправляем  на сервер
        * работает без цыкла но не в перемешку вроде все как надо*/
        $('.save_downoload').click(function(){
-       var s = $("#tr_"+id+" .year").val();
-      // var d = $("#tr_"+id).val();
-       console.log(id);
-       console.log(s);
+       var id_str = "tr_"+id;
+       var year = $("#tr_"+id+" input[name='year']").val();
+       var monts = $("#tr_"+id+" input[name='monts']").val();
+       var sg = $("#tr_"+id+" input[name='sg']").val();
+       var uchet = $("#tr_"+id+" input[name='uchet']").val();
+       var fio = $("#tr_"+id+" input[name='fio']").val();
+       var tab_number = $("#tr_"+id+" input[name='tab_number']").val();
+       var marka_car = $("#tr_"+id+" input[name='marka_car']").val();
+       var int_monts = $("#tr_"+id+" input[name='int_monts']").val();
+       var name_kultura = $("#tr_"+id+" input[name='name_kultura']").val();
+       var agro_uslovia = $("#tr_"+id+" input[name='agro_uslovia']").val();
+       var shufr = $("#tr_"+id+" input[name='shufr']").val();
+       var edinitsa = $("#tr_"+id+" input[name='edinitsa']").val();
+       var work_time = $("#tr_"+id+" input[name='work_time']").val();
+       var norm_vurabotka = $("#tr_"+id+" input[name='norm_vurabotka']").val();
+       var v_nature = $("#tr_"+id+" input[name='v_nature']").val();
+       var na_edinitsu = $("#tr_"+id+" input[name='na_edinitsu']").val();
+       var all = $("#tr_"+id+" input[name='all']").val();
+       var fakt = $("#tr_"+id+" input[name='fakt']").val();
+       
+       //@TODO ошибка при отправки аякса на сервер возможно данные пустые или где то в коде ошибка
+       $.ajax({
+            url : 'mvc/controller/Insert_Controller.php',
+            type : 'POST',
+            dataType:'json',
+            data :{
+                id_str:id_str,
+                year:year,
+                monts:monts,
+                sg:sg,
+                uchet:uchet,
+                fio:fio,
+                tab_number:tab_number,
+                marka_car:marka_car,
+                int_monts:int_monts,
+                name_kultura:name_kultura,
+                agro_uslovia:agro_uslovia,
+                shufr:shufr,
+                edinitsa:edinitsa,
+                work_time:work_time,
+                norm_vurabotka:norm_vurabotka,
+                v_nature:v_nature,
+                na_edinitsu:na_edinitsu,
+                all:all,
+                fakt:fakt
+            },
+            success:function(data){
+                console.log(111);
+                
+            },
+            error:function (xhr, ajaxOptions, thrownError){
+                console.log(thrownError); //выводим ошибку
+            }
+        });
+       
        
    });        
    
@@ -45,7 +96,6 @@ $(document).ready(function(){
    $('.button_del_post').click(function(){
       var id = $( "input:checked" ).val();
       $("#tr_"+id).remove();
-     console.log(id);
    });
     
 });

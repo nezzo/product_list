@@ -7,6 +7,7 @@
  * @author nestor
  */
 class Insert_Controller {
+   public $id_str; 
    public $year;
    public $monts;
    public $sg;
@@ -30,6 +31,7 @@ class Insert_Controller {
    
    /*Принимаем данные и записываем в массив*/
    function proverka(){
+        $this->id_str = $_POST['id_str'];
         $this->year = $_POST['year'];
         $this->monts = $_POST['monts'];
         $this->sg = $_POST['sg'];
@@ -48,6 +50,7 @@ class Insert_Controller {
         $this->fakt = $_POST['fakt'];
         
        $danue_otchet = array(
+           'id_str' => $this->id_str,
            'year'   => $this->year,
            'monts'  => $this->monts,
            'sg'     => $this->sg,
