@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: localhost
--- Время создания: Авг 19 2016 г., 05:59
+-- Время создания: Авг 24 2016 г., 05:29
 -- Версия сервера: 5.7.13-0ubuntu0.16.04.2
 -- Версия PHP: 7.0.8-0ubuntu0.16.04.2
 
@@ -28,12 +28,12 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `product_list_otchet` (
   `id` varchar(255) CHARACTER SET utf8 NOT NULL,
-  `year` int(10) NOT NULL,
+  `year` varchar(10) NOT NULL,
   `monts` varchar(10) CHARACTER SET utf8 NOT NULL,
   `sg` varchar(50) CHARACTER SET utf8 NOT NULL,
   `uchet` varchar(255) CHARACTER SET utf8 NOT NULL,
   `fio` varchar(50) CHARACTER SET utf8 NOT NULL,
-  `tab_number` int(20) NOT NULL,
+  `tab_number` varchar(20) NOT NULL,
   `marka_car` varchar(50) CHARACTER SET utf8 NOT NULL,
   `int_monts` varchar(50) CHARACTER SET utf8 NOT NULL,
   `name_kultura` varchar(100) CHARACTER SET utf8 NOT NULL,

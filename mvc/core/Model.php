@@ -7,21 +7,21 @@ error_reporting(E_ALL ^E_NOTICE);
  * @author nestor
  */
 class Model {
-    protected $login = "root";
-    protected $pass = 1111111;
-   
+    private $login = "root";
+    private $pass = 1111111;
+      
     
-    function __construct (){
+    function connect (){
         try {
-            $db = new PDO('mysql:host = localhost;dbname = product', $this->login, $this->pass);
+            $db = new PDO('mysql:host=localhost;dbname=product', $this->login, $this->pass);
             $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             $db->exec("set names utf8");
+            return $db;                       
              }
         catch(PDOException $e) {
             echo $e->getMessage();
         }
     }
-    
-    
 }
 $model = new Model();
+

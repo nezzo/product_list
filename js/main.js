@@ -1,20 +1,8 @@
 //@TODO надо придумать как по двойному щелчку открывать инпут,а теряя фокус выводило значение
 //@TODO возможно change  от джейквери нам подойдет 
-//@TODO надо разобраться с приемом данных с таблицы и  отправкой на сервер, принимаю без цыкла, смущает))
+
 $(document).ready(function(){
-    /*
-    $(".various_button_new_post,.various_button_post_select").fancybox({
-        maxWidth	: 900,
-        maxHeight	: 400,
-        fitToView	: false,
-        width		: '100%',
-        height		: '100%',
-        autoSize	: false,
-        closeClick	: false,
-        openEffect	: 'none',
-        closeEffect	: 'none'
-    });
-    */
+   
    /*Создаем новые поля*/
    $('.button_new_post').click(function(){
        var date = new Date();
@@ -29,8 +17,7 @@ $(document).ready(function(){
                                 <td><input type="text" name="all"> </td><td><input type="text" name="fakt"> </td>\n\
                                 <td><input type="radio" name="delete" value="'+id+'" ></td></tr>');
    
-      /*Получаем данные с полей и отправляем  на сервер
-       * работает без цыкла но не в перемешку вроде все как надо*/
+      /*Получаем данные с полей и отправляем  на сервер*/
        $('.save_downoload').click(function(){
        var id_str = "tr_"+id;
        var year = $("#tr_"+id+" input[name='year']").val();
@@ -52,11 +39,11 @@ $(document).ready(function(){
        var all = $("#tr_"+id+" input[name='all']").val();
        var fakt = $("#tr_"+id+" input[name='fakt']").val();
        
-       //@TODO ошибка при отправки аякса на сервер возможно данные пустые или где то в коде ошибка
+       
        $.ajax({
             url : 'mvc/controller/Insert_Controller.php',
             type : 'POST',
-            dataType:'json',
+            dataType:'text',
             data :{
                 id_str:id_str,
                 year:year,
@@ -79,7 +66,8 @@ $(document).ready(function(){
                 fakt:fakt
             },
             success:function(data){
-                console.log(111);
+                console.log(data);
+                
                 
             },
             error:function (xhr, ajaxOptions, thrownError){
