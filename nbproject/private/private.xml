@@ -5,7 +5,9 @@
         <group>
             <file>file:/var/www/html/product/mvc/core/Model.php</file>
             <file>file:/var/www/html/product/mvc/controller/Insert_Controller.php</file>
+            <file>file:/var/www/html/product/mvc/controller/Select_Controller.php</file>
             <file>file:/var/www/html/product/js/main.js</file>
+            <file>file:/var/www/html/product/mvc/model/Select_Model.php</file>
             <file>file:/var/www/html/product/mvc/model/InsertModel.php</file>
         </group>
     </open-files>

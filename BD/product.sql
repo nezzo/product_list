@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: localhost
--- Время создания: Авг 24 2016 г., 05:29
+-- Время создания: Авг 26 2016 г., 04:07
 -- Версия сервера: 5.7.13-0ubuntu0.16.04.2
 -- Версия PHP: 7.0.8-0ubuntu0.16.04.2
 
@@ -19,6 +19,29 @@ SET time_zone = "+00:00";
 --
 -- База данных: `product`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `product_list_const`
+--
+
+CREATE TABLE `product_list_const` (
+  `id` int(255) NOT NULL,
+  `agro_uslovia` varchar(255) CHARACTER SET utf8 NOT NULL,
+  `edinitsa` varchar(255) CHARACTER SET utf8 NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Дамп данных таблицы `product_list_const`
+--
+
+INSERT INTO `product_list_const` (`id`, `agro_uslovia`, `edinitsa`) VALUES
+(1, 'внесення добрив\r\n', '2.5'),
+(2, 'культивація\r\n', '5'),
+(3, 'дискування\r\n', '6.3'),
+(4, 'посів з внесенням добрив	', '3.1'),
+(5, 'прикочування  посівів	', '2.5');
 
 -- --------------------------------------------------------
 
@@ -53,11 +76,26 @@ CREATE TABLE `product_list_otchet` (
 --
 
 --
+-- Индексы таблицы `product_list_const`
+--
+ALTER TABLE `product_list_const`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Индексы таблицы `product_list_otchet`
 --
 ALTER TABLE `product_list_otchet`
   ADD PRIMARY KEY (`id`);
 
+--
+-- AUTO_INCREMENT для сохранённых таблиц
+--
+
+--
+-- AUTO_INCREMENT для таблицы `product_list_const`
+--
+ALTER TABLE `product_list_const`
+  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
