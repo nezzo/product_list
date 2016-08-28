@@ -42,3 +42,7 @@ button.delete_otchet {
     position: absolute;
     right: -20px;
 }
+.na_edinitsu, .all, .fakt{
+    font-size: 15px;
+    text-align: center;
+}

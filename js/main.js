@@ -27,15 +27,14 @@ $(document).ready(function(){
                                 <td><input type="text" name="marka_car"> </td><td><input type="text" name="int_monts"> </td><td><input type="text" name="name_kultura"> </td>\n\
                                 <td><div class="agro_uslovia"><select><option style="text-align:center; color:red;">Выберите условие:</option>'+data+'</select></div> </td><td><input type="text" name="shufr"> </td><td><input type="text" name="edinitsa"> </td>\n\
                                 <td><input type="text" name="work_time"> </td><td><input type="text" name="norm_vurabotka"> </td><td><input type="text" name="v_nature"> </td><td><div class="na_edinitsu"></div></td>\n\
-                                <td><div class="all"></div></td><td><input type="text" name="fakt"> </td>\n\
+                                <td><div class="all"></div></td><td><div class="fakt"></div> </td>\n\
                                 <td><input type="radio" name="delete" value="'+id+'" ></td></tr>');
         
          /*отправляем в базу id для получения "на еденицу работы"в ответ получим данные 
           * и занесем в таблицу*/
          $("#tr_"+id+" .agro_uslovia").change(function () {
              var agro_uslovia_id = $("#tr_"+id+" .agro_uslovia option:selected").val();
-           
-             /*@TODO надо дописать выборку с базы для столбца на единицу*/
+            
              $.ajax({
                url : 'mvc/controller/Select_table_na_edenitsu_Controller.php',
                type : 'POST',
@@ -44,7 +43,7 @@ $(document).ready(function(){
                 agro_uslovia_id:agro_uslovia_id
             },
              success:function(data){
-                 console.log(data);
+                 $("#tr_"+id+" .na_edinitsu").text(data);
                  
              },
              error:function (xhr, ajaxOptions, thrownError){
@@ -52,6 +51,17 @@ $(document).ready(function(){
             }
               
            });
+        });
+        
+        $("#tr_"+id+" input[name='v_nature']").change(function(){
+            var v_nature = $("#tr_"+id+" input[name='v_nature']").val();
+            var na_edinitsu = $("#tr_"+id+" .na_edinitsu").text();
+            
+            var summa = v_nature*na_edinitsu;
+            
+            $("#tr_"+id+" .all").text(summa);
+            $("#tr_"+id+" .fakt").text(summa);
+            
         });
              },
             error:function (xhr, ajaxOptions, thrownError){
@@ -79,12 +89,16 @@ $(document).ready(function(){
        var work_time = $("#tr_"+id+" input[name='work_time']").val();
        var norm_vurabotka = $("#tr_"+id+" input[name='norm_vurabotka']").val();
        var v_nature = $("#tr_"+id+" input[name='v_nature']").val();
-       var na_edinitsu = $(".na_edinitsu").val();
-       var all = $("#tr_"+id+" .all ").val();
-       var fakt = $("#tr_"+id+" input[name='fakt']").val();
+       var na_edinitsu = $("#tr_"+id+" .na_edinitsu").text();
+       var all = $("#tr_"+id+" .all ").text();
+       var fakt = $("#tr_"+id+" .fakt").text();
                              
        $.ajax({
+           /* заносим  данные отчета в базу
             url : 'mvc/controller/Insert_Controller.php',
+           */    
+          //Передаем данные для формирование xsl файла
+           url : 'mvc/controller/Insert_xsl.php',
             type : 'POST',
             dataType:'text',
             data :{
@@ -109,7 +123,7 @@ $(document).ready(function(){
                 fakt:fakt
             },
             success:function(data){
-                
+                console.log(data);
                 
             },
             error:function (xhr, ajaxOptions, thrownError){

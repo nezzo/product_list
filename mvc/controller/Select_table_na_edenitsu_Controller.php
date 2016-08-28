@@ -9,10 +9,13 @@ class Select_table_na_edenitsu_Controller {
     }
   
     function agro_uslovia_id(){
-        require_once '../model/Select_table_na_edenitsu_Model.php';
-      $Select_table_na_edenitsu_Model = new Select_table_na_edenitsu_Model();
-        $select_model->agro_uslovia_id_name();
         $agro_uslovia_id = $_POST['agro_uslovia_id'];
+        require_once '../model/Select_table_na_edenitsu_Model.php';
+        $Select_table_na_edenitsu_Model = new Select_table_na_edenitsu_Model();
+        $Select_table_na_edenitsu_Model->select_agro_uslovia_id($agro_uslovia_id);
+        
+         
+        
         
     }
 }
