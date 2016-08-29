@@ -36,7 +36,6 @@ class Insert_xls {
    
    /*Принимаем данные и записываем в массив*/
    function write_xls(){
-        $this->id_str = $_POST['id_str'];
         $this->year = $_POST['year'];
         $this->monts = $_POST['monts'];
         $this->sg = $_POST['sg'];
@@ -126,15 +125,16 @@ class Insert_xls {
         /*Создаем цыкл для массива и заполняем все оставшиеся поля*/
        for ($i = 0; $i< $rows_table; $i++){
            $index = 9 + $i;
-           
-           var_dump($index);
-            var_dump($dannue_array[0]);
+             var_dump($index);
+             var_dump ($dannue_array[0]);
+              
+            
             // (Числа месяца)
         $sheet->setCellValue('A'.$index, $dannue_array[0]);
         $sheet->getStyle('A'.$index)->getFill()->setFillType(
             PHPExcel_Style_Fill::FILL_SOLID);
         $sheet->getStyle('A'.$index)->getFill()->getStartColor()->setRGB('EEEEEE');
-        
+       
          // (Название культуры и выполненной работы, состав агрегата)
         $sheet->setCellValue('C'.$index, $dannue_array[1]);
         $sheet->getStyle('C'.$index)->getFill()->setFillType(
@@ -194,7 +194,7 @@ class Insert_xls {
         $sheet->getStyle('X'.$index)->getFill()->setFillType(
             PHPExcel_Style_Fill::FILL_SOLID);
         $sheet->getStyle('X'.$index)->getFill()->getStartColor()->setRGB('EEEEEE');
-            
+          
       }
         
         /*Сохраняем данные в файл (путь/файл) и скачиваем*/

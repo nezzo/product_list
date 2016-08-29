@@ -33,8 +33,7 @@ error_reporting(E_ALL ^E_NOTICE);
                                          </div>
                                          <div class="col-md-6">
                                     <button class='save_downoload'>Сохранить и скачать</button>
-                                    <button class='delete_otchet'>Очистить базу</button>
-                                         </div>
+                                    </div>
                                      </div>
                                  </div>
                              </div>
