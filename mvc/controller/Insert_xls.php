@@ -55,6 +55,12 @@ class Insert_xls {
         $this->na_edinitsu = $_POST['na_edinitsu'];
         $this->all = $_POST['all'];
         $this->fakt = $_POST['fakt'];
+        $rows_table = $_POST['rows_table'];
+        
+        /*Создаем массив и записываем туда все данные*/
+        $dannue_array =array($this->int_monts,$this->name_kultura,$this->agro_uslovia,
+                             $this->shufr,$this->edinitsa,$this->work_time,$this->norm_vurabotka,
+                             $this->v_nature,$this->na_edinitsu,$this->all,$this->fakt);
         
        // Создаем объект класса PHPExcel
        $xls = new PHPExcel();
@@ -69,17 +75,141 @@ class Insert_xls {
         $sheet->setTitle('Формирование товарного листа');
         
         
-        // Вставляем текст в ячейку R1
-        $sheet->setCellValue("R1", 'Hi world');
-        $sheet->getStyle('R1')->getFill()->setFillType(
+        // Вставляем текст в ячейку A4 (Год)
+        $sheet->setCellValue("A4", $this->year);
+        $sheet->getStyle('A4')->getFill()->setFillType(
             PHPExcel_Style_Fill::FILL_SOLID);
-        $sheet->getStyle('R1')->getFill()->getStartColor()->setRGB('EEEEEE');
+        $sheet->getStyle('A4')->getFill()->getStartColor()->setRGB('EEEEEE');
         // Объединяем ячейки
-        $sheet->mergeCells('R1:X1');
+       // $sheet->mergeCells('R1:X1');
         
-        /*Сохраняем данные в файл (путь/файл)*/
+        /*(Месяц)*/
+        $sheet->setCellValue("B4", $this->monts);
+        $sheet->getStyle('B4')->getFill()->setFillType(
+            PHPExcel_Style_Fill::FILL_SOLID);
+        $sheet->getStyle('B4')->getFill()->getStartColor()->setRGB('EEEEEE');
+        
+        /*Сельхозпредприятие*/
+        $sheet->setCellValue("D4", $this->sg);
+        $sheet->getStyle('D4')->getFill()->setFillType(
+            PHPExcel_Style_Fill::FILL_SOLID);
+        $sheet->getStyle('D4')->getFill()->getStartColor()->setRGB('EEEEEE');
+        
+        /*УЧЁТНЫЙ ЛИСТ № ТРАКТОРИСТА-МАШИНИСТА*/
+        $sheet->setCellValue("H3", 'УЧЁТНЫЙ ЛИСТ №__ '.$this->uchet.'__ТРАКТОРИСТА-МАШИНИСТА');
+        $sheet->getStyle('H3')->getFill()->setFillType(
+            PHPExcel_Style_Fill::FILL_SOLID);
+        $sheet->getStyle('H3')->getFill()->getStartColor()->setRGB('EEEEEE');
+        
+        /*Ф.И.О. тракториста*/
+        $sheet->setCellValue("J4", $this->fio);
+        $sheet->getStyle('J4')->getFill()->setFillType(
+            PHPExcel_Style_Fill::FILL_SOLID);
+        $sheet->getStyle('J4')->getFill()->getStartColor()->setRGB('EEEEEE');
+        
+        /*Табельный номер*/
+        $sheet->setCellValue("R4", $this->tab_number);
+        $sheet->getStyle('R4')->getFill()->setFillType(
+            PHPExcel_Style_Fill::FILL_SOLID);
+        $sheet->getStyle('R4')->getFill()->getStartColor()->setRGB('EEEEEE');
+        
+        /*Марка машины*/
+        $sheet->setCellValue("S4", $this->marka_car);
+        $sheet->getStyle('S4')->getFill()->setFillType(
+            PHPExcel_Style_Fill::FILL_SOLID);
+        $sheet->getStyle('S4')->getFill()->getStartColor()->setRGB('EEEEEE');
+        
+        
+        /*@TODO тут трабл с  цыклом почему то задваивает запись из-за этого в фай записывается 
+          2 одинаковые записи, что не есть хорошо надо разобраться*/ 
+        
+        /*Создаем цыкл для массива и заполняем все оставшиеся поля*/
+       for ($i = 0; $i< $rows_table; $i++){
+           $index = 9 + $i;
+           
+           var_dump($index);
+            var_dump($dannue_array[0]);
+            // (Числа месяца)
+        $sheet->setCellValue('A'.$index, $dannue_array[0]);
+        $sheet->getStyle('A'.$index)->getFill()->setFillType(
+            PHPExcel_Style_Fill::FILL_SOLID);
+        $sheet->getStyle('A'.$index)->getFill()->getStartColor()->setRGB('EEEEEE');
+        
+         // (Название культуры и выполненной работы, состав агрегата)
+        $sheet->setCellValue('C'.$index, $dannue_array[1]);
+        $sheet->getStyle('C'.$index)->getFill()->setFillType(
+            PHPExcel_Style_Fill::FILL_SOLID);
+        $sheet->getStyle('C'.$index)->getFill()->getStartColor()->setRGB('EEEEEE');
+        
+         // (Агротехнические условия выполнения работы)
+        $sheet->setCellValue('E'.$index, $dannue_array[2][$i]);
+        $sheet->getStyle('E'.$index)->getFill()->setFillType(
+            PHPExcel_Style_Fill::FILL_SOLID);
+        $sheet->getStyle('E'.$index)->getFill()->getStartColor()->setRGB('EEEEEE');
+        
+         //(Шифр синтетического и аналитического учета)
+        $sheet->setCellValue('I'.$index, $dannue_array[3][$i]);
+        $sheet->getStyle('I'.$index)->getFill()->setFillType(
+            PHPExcel_Style_Fill::FILL_SOLID);
+        $sheet->getStyle('I'.$index)->getFill()->getStartColor()->setRGB('EEEEEE');
+        
+         // (Единица измерения)
+        $sheet->setCellValue('J'.$index, $dannue_array[4][$i]);
+        $sheet->getStyle('J'.$index)->getFill()->setFillType(
+            PHPExcel_Style_Fill::FILL_SOLID);
+        $sheet->getStyle('J'.$index)->getFill()->getStartColor()->setRGB('EEEEEE');
+        
+         //(Отработано часов)
+        $sheet->setCellValue('K'.$index, $dannue_array[5][$i]);
+        $sheet->getStyle('K'.$index)->getFill()->setFillType(
+            PHPExcel_Style_Fill::FILL_SOLID);
+        $sheet->getStyle('K'.$index)->getFill()->getStartColor()->setRGB('EEEEEE');
+        
+         //(Норма выработки)
+        $sheet->setCellValue('L'.$index, $dannue_array[6][$i]);
+        $sheet->getStyle('L'.$index)->getFill()->setFillType(
+            PHPExcel_Style_Fill::FILL_SOLID);
+        $sheet->getStyle('L'.$index)->getFill()->getStartColor()->setRGB('EEEEEE');
+        
+         //( в натуре)
+        $sheet->setCellValue('O'.$index, $dannue_array[7][$i]);
+        $sheet->getStyle('O'.$index)->getFill()->setFillType(
+            PHPExcel_Style_Fill::FILL_SOLID);
+        $sheet->getStyle('O'.$index)->getFill()->getStartColor()->setRGB('EEEEEE');
+        
+         //(на единицу работы)
+        $sheet->setCellValue('V'.$index, $dannue_array[8][$i]);
+        $sheet->getStyle('V'.$index)->getFill()->setFillType(
+            PHPExcel_Style_Fill::FILL_SOLID);
+        $sheet->getStyle('V'.$index)->getFill()->getStartColor()->setRGB('EEEEEE');
+        
+         // (всего)
+        $sheet->setCellValue('W'.$index, $dannue_array[9][$i]);
+        $sheet->getStyle('W'.$index)->getFill()->setFillType(
+            PHPExcel_Style_Fill::FILL_SOLID);
+        $sheet->getStyle('W'.$index)->getFill()->getStartColor()->setRGB('EEEEEE');
+        
+         //(фактически)
+        $sheet->setCellValue('X'.$index, $dannue_array[10][$i]);
+        $sheet->getStyle('X'.$index)->getFill()->setFillType(
+            PHPExcel_Style_Fill::FILL_SOLID);
+        $sheet->getStyle('X'.$index)->getFill()->getStartColor()->setRGB('EEEEEE');
+            
+      }
+        
+        /*Сохраняем данные в файл (путь/файл) и скачиваем*/
          $objWriter = new PHPExcel_Writer_Excel5($xls);
-        $objWriter->save('../PHPExcel/otchet.xls');
+         $data = date("d.m.Y");
+         
+         /*
+            header('Content-Type: application/vnd.ms-excel');
+            header('Content-Disposition: attachment;filename="('.$data.')otchet.xls"');
+            header('Cache-Control: max-age=0');
+            $objWriter->save('php://output');
+            echo "($data)otchet.xls";
+          * 
+          */
+            $objWriter->save('../PHPExcel/otchet.xls');
    }
 }
 

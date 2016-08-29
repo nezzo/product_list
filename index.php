@@ -38,9 +38,8 @@ error_reporting(E_ALL ^E_NOTICE);
                                      </div>
                                  </div>
                              </div>
-                                <div class="col-md-12">
-                            <div class="table">
-                                    <form class='form_product' action='model.php' name='table' method='POST'>
+                            <div class="table_one">
+                                    <form class='form_product'  name='table' method='POST'>
                                      <table>
                                          <thead>
                                          <th>Год</th>
@@ -50,6 +49,28 @@ error_reporting(E_ALL ^E_NOTICE);
                                          <th>Ф.И.О. тракториста</th>
                                          <th>Табельный номер</th>
                                          <th>Марка машины</th>
+                                         </thead>
+                                         <tbody>
+                                         <tr>
+                                             <td><input type="text" name="year"></td>
+                                             <td><input type="text" name="monts"> </td>
+                                             <td><input type="text" name="sg"> </td>
+                                             <td><input type="text" name="uchet"> </td>
+                                             <td><input type="text" name="fio"></td>
+                                             <td><input type="text" name="tab_number"></td>
+                                             <td><input type="text" name="marka_car"></td>
+                                         </tr>
+                                         </tbody>
+
+                                     </table>
+                                         
+                                    </form>
+                                </div>
+                          
+                            <div class="table_two">
+                                    <form class='form_product'  name='table' method='POST'>
+                                     <table>
+                                         <thead>
                                          <th>Числа месяца</th>
                                          <th>Название культуры и выполненной работы, состав агрегата</th>
                                          <th>Агротехнические условия выполнения работы</th>
@@ -69,7 +90,7 @@ error_reporting(E_ALL ^E_NOTICE);
                                          
                                     </form>
                                 </div>
-                                </div>      
+                                    
                            </div>
                     </div>
                 </div>

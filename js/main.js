@@ -18,13 +18,9 @@ $(document).ready(function(){
                 
             },
              success:function(data){
-               
-                  
+                 
        
-      $('.table tbody').append('<tr id="tr_'+id+'"><td><input type="text" name="year"></td><td><input type="text" name="monts"> </td>\n\
-                                <td><input type="text" name="sg"> </td><td><input type="text" name="uchet"> </td>\n\
-                                <td><input type="text" name="fio"> </td><td><input type="text" name="tab_number"> </td>\n\
-                                <td><input type="text" name="marka_car"> </td><td><input type="text" name="int_monts"> </td><td><input type="text" name="name_kultura"> </td>\n\
+      $('.table_two tbody').append('<tr id="tr_'+id+'"><td><input type="text" name="int_monts"> </td><td><input type="text" name="name_kultura"> </td>\n\
                                 <td><div class="agro_uslovia"><select><option style="text-align:center; color:red;">Выберите условие:</option>'+data+'</select></div> </td><td><input type="text" name="shufr"> </td><td><input type="text" name="edinitsa"> </td>\n\
                                 <td><input type="text" name="work_time"> </td><td><input type="text" name="norm_vurabotka"> </td><td><input type="text" name="v_nature"> </td><td><div class="na_edinitsu"></div></td>\n\
                                 <td><div class="all"></div></td><td><div class="fakt"></div> </td>\n\
@@ -74,13 +70,13 @@ $(document).ready(function(){
        /*Получаем данные с полей и отправляем  на сервер "Функия сохранить и скачать"*/
        $('.save_downoload').click(function(){
        var id_str = "tr_"+id;
-       var year = $("#tr_"+id+" input[name='year']").val();
-       var monts = $("#tr_"+id+" input[name='monts']").val();
-       var sg = $("#tr_"+id+" input[name='sg']").val();
-       var uchet = $("#tr_"+id+" input[name='uchet']").val();
-       var fio = $("#tr_"+id+" input[name='fio']").val();
-       var tab_number = $("#tr_"+id+" input[name='tab_number']").val();
-       var marka_car = $("#tr_"+id+" input[name='marka_car']").val();
+       var year = $("input[name='year']").val();
+       var monts = $("input[name='monts']").val();
+       var sg = $("input[name='sg']").val();
+       var uchet = $("input[name='uchet']").val();
+       var fio = $("input[name='fio']").val();
+       var tab_number = $("input[name='tab_number']").val();
+       var marka_car = $("input[name='marka_car']").val();
        var int_monts = $("#tr_"+id+" input[name='int_monts']").val();
        var name_kultura = $("#tr_"+id+" input[name='name_kultura']").val();
        var agro_uslovia = $("#tr_"+id+" .agro_uslovia option:selected").text();
@@ -92,13 +88,18 @@ $(document).ready(function(){
        var na_edinitsu = $("#tr_"+id+" .na_edinitsu").text();
        var all = $("#tr_"+id+" .all ").text();
        var fakt = $("#tr_"+id+" .fakt").text();
-                             
+       
+       /*Получаем количество строк в таблице и минусуем одну посколько там идут заголовки табицы*/
+       var rows_table = document.getElementsByClassName('table_two').item(0).getElementsByTagName('tr').length - 1;
+         
+           
+          
        $.ajax({
            /* заносим  данные отчета в базу
             url : 'mvc/controller/Insert_Controller.php',
            */    
           //Передаем данные для формирование xsl файла
-           url : 'mvc/controller/Insert_xsl.php',
+           url : 'mvc/controller/Insert_xls.php',
             type : 'POST',
             dataType:'text',
             data :{
@@ -120,11 +121,11 @@ $(document).ready(function(){
                 v_nature:v_nature,
                 na_edinitsu:na_edinitsu,
                 all:all,
-                fakt:fakt
+                fakt:fakt,
+                rows_table:rows_table
             },
             success:function(data){
                 console.log(data);
-                
             },
             error:function (xhr, ajaxOptions, thrownError){
                 console.log(thrownError); //выводим ошибку
