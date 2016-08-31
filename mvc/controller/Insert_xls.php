@@ -11,24 +11,7 @@ require_once('../PHPExcel/PHPExcel/Writer/Excel5.php');
 
 
 class Insert_xls {
-   public $id_str; 
-   public $year;
-   public $monts;
-   public $sg;
-   public $uchet;
-   public $fio;
-   public $tab_number;
-   public $marka_car;
-   public $int_monts;
-   public $name_kultura;
-   public $shufr;
-   public $edinitsa;
-   public $work_time;
-   public $norm_vurabotka;
-   public $v_nature;
-   public $all;
-   public $fakt;
-   
+     
    
    function __construct() {
        $this->write_xls();
@@ -36,31 +19,16 @@ class Insert_xls {
    
    /*Принимаем данные и записываем в массив*/
    function write_xls(){
-        $this->year = $_POST['year'];
-        $this->monts = $_POST['monts'];
-        $this->sg = $_POST['sg'];
-        $this->uchet = $_POST['uchet'];
-        $this->fio = $_POST['fio'];
-        $this->tab_number = $_POST['tab_number'];
-        $this->marka_car = $_POST['marka_car'];
-        $this->int_monts = $_POST['int_monts'];
-        $this->name_kultura = $_POST['name_kultura'];
-        $this->agro_uslovia = $_POST['agro_uslovia'];
-        $this->shufr = $_POST['shufr'];
-        $this->edinitsa = $_POST['edinitsa'];
-        $this->work_time = $_POST['work_time'];
-        $this->norm_vurabotka = $_POST['norm_vurabotka'];
-        $this->v_nature = $_POST['v_nature'];
-        $this->na_edinitsu = $_POST['na_edinitsu'];
-        $this->all = $_POST['all'];
-        $this->fakt = $_POST['fakt'];
+        $year = $_POST['year'];
+        $monts = $_POST['monts'];
+        $sg = $_POST['sg'];
+        $uchet = $_POST['uchet'];
+        $fio = $_POST['fio'];
+        $tab_number = $_POST['tab_number'];
+        $marka_car = $_POST['marka_car'];
+        $mas = $_POST['mas'];
         $rows_table = $_POST['rows_table'];
-        
-        /*Создаем массив и записываем туда все данные*/
-        $dannue_array =array($this->int_monts,$this->name_kultura,$this->agro_uslovia,
-                             $this->shufr,$this->edinitsa,$this->work_time,$this->norm_vurabotka,
-                             $this->v_nature,$this->na_edinitsu,$this->all,$this->fakt);
-        
+                
        // Создаем объект класса PHPExcel
        $xls = new PHPExcel();
        //Открываем файл-шаблон
@@ -75,7 +43,7 @@ class Insert_xls {
         
         
         // Вставляем текст в ячейку A4 (Год)
-        $sheet->setCellValue("A4", $this->year);
+        $sheet->setCellValue("A4", $year);
         $sheet->getStyle('A4')->getFill()->setFillType(
             PHPExcel_Style_Fill::FILL_SOLID);
         $sheet->getStyle('A4')->getFill()->getStartColor()->setRGB('EEEEEE');
@@ -83,114 +51,108 @@ class Insert_xls {
        // $sheet->mergeCells('R1:X1');
         
         /*(Месяц)*/
-        $sheet->setCellValue("B4", $this->monts);
+        $sheet->setCellValue("B4", $monts);
         $sheet->getStyle('B4')->getFill()->setFillType(
             PHPExcel_Style_Fill::FILL_SOLID);
         $sheet->getStyle('B4')->getFill()->getStartColor()->setRGB('EEEEEE');
         
         /*Сельхозпредприятие*/
-        $sheet->setCellValue("D4", $this->sg);
+        $sheet->setCellValue("D4", $sg);
         $sheet->getStyle('D4')->getFill()->setFillType(
             PHPExcel_Style_Fill::FILL_SOLID);
         $sheet->getStyle('D4')->getFill()->getStartColor()->setRGB('EEEEEE');
         
         /*УЧЁТНЫЙ ЛИСТ № ТРАКТОРИСТА-МАШИНИСТА*/
-        $sheet->setCellValue("H3", 'УЧЁТНЫЙ ЛИСТ №__ '.$this->uchet.'__ТРАКТОРИСТА-МАШИНИСТА');
+        $sheet->setCellValue("H3", 'УЧЁТНЫЙ ЛИСТ №__ '.$uchet.'__ТРАКТОРИСТА-МАШИНИСТА');
         $sheet->getStyle('H3')->getFill()->setFillType(
             PHPExcel_Style_Fill::FILL_SOLID);
         $sheet->getStyle('H3')->getFill()->getStartColor()->setRGB('EEEEEE');
         
         /*Ф.И.О. тракториста*/
-        $sheet->setCellValue("J4", $this->fio);
+        $sheet->setCellValue("J4", $fio);
         $sheet->getStyle('J4')->getFill()->setFillType(
             PHPExcel_Style_Fill::FILL_SOLID);
         $sheet->getStyle('J4')->getFill()->getStartColor()->setRGB('EEEEEE');
         
         /*Табельный номер*/
-        $sheet->setCellValue("R4", $this->tab_number);
+        $sheet->setCellValue("R4", $tab_number);
         $sheet->getStyle('R4')->getFill()->setFillType(
             PHPExcel_Style_Fill::FILL_SOLID);
         $sheet->getStyle('R4')->getFill()->getStartColor()->setRGB('EEEEEE');
         
         /*Марка машины*/
-        $sheet->setCellValue("S4", $this->marka_car);
+        $sheet->setCellValue("S4", $marka_car);
         $sheet->getStyle('S4')->getFill()->setFillType(
             PHPExcel_Style_Fill::FILL_SOLID);
         $sheet->getStyle('S4')->getFill()->getStartColor()->setRGB('EEEEEE');
         
-        
-        /*@TODO тут трабл с  цыклом почему то задваивает запись из-за этого в фай записывается 
-          2 одинаковые записи, что не есть хорошо надо разобраться*/ 
-        
+                
         /*Создаем цыкл для массива и заполняем все оставшиеся поля*/
        for ($i = 0; $i< $rows_table; $i++){
            $index = 9 + $i;
-             var_dump($index);
-             var_dump ($dannue_array[0]);
-              
-            
-            // (Числа месяца)
-        $sheet->setCellValue('A'.$index, $dannue_array[0]);
+           
+           // (Числа месяца)
+        $sheet->setCellValue('A'.$index, $mas[$i][0]);
         $sheet->getStyle('A'.$index)->getFill()->setFillType(
             PHPExcel_Style_Fill::FILL_SOLID);
         $sheet->getStyle('A'.$index)->getFill()->getStartColor()->setRGB('EEEEEE');
        
          // (Название культуры и выполненной работы, состав агрегата)
-        $sheet->setCellValue('C'.$index, $dannue_array[1]);
+        $sheet->setCellValue('C'.$index, $mas[$i][1]);
         $sheet->getStyle('C'.$index)->getFill()->setFillType(
             PHPExcel_Style_Fill::FILL_SOLID);
         $sheet->getStyle('C'.$index)->getFill()->getStartColor()->setRGB('EEEEEE');
         
          // (Агротехнические условия выполнения работы)
-        $sheet->setCellValue('E'.$index, $dannue_array[2][$i]);
+        $sheet->setCellValue('E'.$index, $mas[$i][2]);
         $sheet->getStyle('E'.$index)->getFill()->setFillType(
             PHPExcel_Style_Fill::FILL_SOLID);
         $sheet->getStyle('E'.$index)->getFill()->getStartColor()->setRGB('EEEEEE');
         
          //(Шифр синтетического и аналитического учета)
-        $sheet->setCellValue('I'.$index, $dannue_array[3][$i]);
+        $sheet->setCellValue('I'.$index, $mas[$i][3]);
         $sheet->getStyle('I'.$index)->getFill()->setFillType(
             PHPExcel_Style_Fill::FILL_SOLID);
         $sheet->getStyle('I'.$index)->getFill()->getStartColor()->setRGB('EEEEEE');
         
          // (Единица измерения)
-        $sheet->setCellValue('J'.$index, $dannue_array[4][$i]);
+        $sheet->setCellValue('J'.$index, $mas[$i][4]);
         $sheet->getStyle('J'.$index)->getFill()->setFillType(
             PHPExcel_Style_Fill::FILL_SOLID);
         $sheet->getStyle('J'.$index)->getFill()->getStartColor()->setRGB('EEEEEE');
         
          //(Отработано часов)
-        $sheet->setCellValue('K'.$index, $dannue_array[5][$i]);
+        $sheet->setCellValue('K'.$index, $mas[$i][5]);
         $sheet->getStyle('K'.$index)->getFill()->setFillType(
             PHPExcel_Style_Fill::FILL_SOLID);
         $sheet->getStyle('K'.$index)->getFill()->getStartColor()->setRGB('EEEEEE');
         
          //(Норма выработки)
-        $sheet->setCellValue('L'.$index, $dannue_array[6][$i]);
+        $sheet->setCellValue('L'.$index, $mas[$i][6]);
         $sheet->getStyle('L'.$index)->getFill()->setFillType(
             PHPExcel_Style_Fill::FILL_SOLID);
         $sheet->getStyle('L'.$index)->getFill()->getStartColor()->setRGB('EEEEEE');
         
          //( в натуре)
-        $sheet->setCellValue('O'.$index, $dannue_array[7][$i]);
+        $sheet->setCellValue('O'.$index, $mas[$i][7]);
         $sheet->getStyle('O'.$index)->getFill()->setFillType(
             PHPExcel_Style_Fill::FILL_SOLID);
         $sheet->getStyle('O'.$index)->getFill()->getStartColor()->setRGB('EEEEEE');
         
          //(на единицу работы)
-        $sheet->setCellValue('V'.$index, $dannue_array[8][$i]);
+        $sheet->setCellValue('V'.$index, $mas[$i][8]);
         $sheet->getStyle('V'.$index)->getFill()->setFillType(
             PHPExcel_Style_Fill::FILL_SOLID);
         $sheet->getStyle('V'.$index)->getFill()->getStartColor()->setRGB('EEEEEE');
         
          // (всего)
-        $sheet->setCellValue('W'.$index, $dannue_array[9][$i]);
+        $sheet->setCellValue('W'.$index, $mas[$i][9]);
         $sheet->getStyle('W'.$index)->getFill()->setFillType(
             PHPExcel_Style_Fill::FILL_SOLID);
         $sheet->getStyle('W'.$index)->getFill()->getStartColor()->setRGB('EEEEEE');
         
          //(фактически)
-        $sheet->setCellValue('X'.$index, $dannue_array[10][$i]);
+        $sheet->setCellValue('X'.$index, $mas[$i][10]);
         $sheet->getStyle('X'.$index)->getFill()->setFillType(
             PHPExcel_Style_Fill::FILL_SOLID);
         $sheet->getStyle('X'.$index)->getFill()->getStartColor()->setRGB('EEEEEE');
@@ -200,16 +162,27 @@ class Insert_xls {
         /*Сохраняем данные в файл (путь/файл) и скачиваем*/
          $objWriter = new PHPExcel_Writer_Excel5($xls);
          $data = date("d.m.Y");
+         $objWriter->save('../otchet/otchet.xls');
          
-         /*
-            header('Content-Type: application/vnd.ms-excel');
-            header('Content-Disposition: attachment;filename="('.$data.')otchet.xls"');
-            header('Cache-Control: max-age=0');
-            $objWriter->save('php://output');
-            echo "($data)otchet.xls";
-          * 
-          */
-            $objWriter->save('../PHPExcel/otchet.xls');
+         /*переименовываем файл по дате для скачивания*/
+         $new_name = rename("../otchet/otchet.xls", "../otchet/$data.xls");
+         
+         /*@TODO Надо разобраться со скачиванием а то документ не скачивается*/
+         
+             if($new_name == true){
+             echo "($data)otchet.xls";
+                header('HTTP/1.0 200 OK');
+                header('Content-Disposition: attachment; filename="' . basename("($data)otchet.xls") . '"');
+                header('Content-Transfer-Encoding: binary');
+                header('Accept-Ranges: bytes');
+                header('Content-Length: ' . (filesize("../otchet/($data)otchet.xls")));
+                header ('Location: ' . '../otchet/('.$data.')otchet.xls');
+                        
+             
+             
+         }
+          
+           
    }
 }
 
