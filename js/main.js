@@ -118,8 +118,8 @@ $(document).ready(function(){
                 mas:mas
             },
             success:function(data){
-                console.log(data);
-                
+             //console.log(data);
+              location.href= data;
             },
             error:function (xhr, ajaxOptions, thrownError){
                 console.log(thrownError); //выводим ошибку
@@ -133,6 +133,10 @@ $(document).ready(function(){
    $('.button_del_post').click(function(){
       var id_remove = $( "input:checked" ).val();
       $("#tr_"+id_remove).remove();
+   });
+   
+   $('.button_new_uslovia').click(function(){
+       location.href="/product/mvc/view/Create_agro_uslovia.php";
    });
    
     

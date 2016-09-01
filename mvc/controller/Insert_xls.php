@@ -86,12 +86,27 @@ class Insert_xls {
             PHPExcel_Style_Fill::FILL_SOLID);
         $sheet->getStyle('S4')->getFill()->getStartColor()->setRGB('EEEEEE');
         
-                
+        /*Узнаем сколько строк добавлено и если добавлено больше чем в шаблоне
+        * с помощью расчет мы добавляем новые строки  
+         *        */
+       for ($i = 0; $i< $rows_table; $i++){
+           $index = 9 + $i; 
+       }
+        
+        if ($index > 21){
+               $new_rows = $index - 21;
+               
+               $sheet->insertNewRowBefore(30, $new_rows);
+               
+            }
+       
+        
+        
         /*Создаем цыкл для массива и заполняем все оставшиеся поля*/
        for ($i = 0; $i< $rows_table; $i++){
            $index = 9 + $i;
            
-           // (Числа месяца)
+          // (Числа месяца)
         $sheet->setCellValue('A'.$index, $mas[$i][0]);
         $sheet->getStyle('A'.$index)->getFill()->setFillType(
             PHPExcel_Style_Fill::FILL_SOLID);
@@ -158,6 +173,7 @@ class Insert_xls {
         $sheet->getStyle('X'.$index)->getFill()->getStartColor()->setRGB('EEEEEE');
           
       }
+      
         
         /*Сохраняем данные в файл (путь/файл) и скачиваем*/
          $objWriter = new PHPExcel_Writer_Excel5($xls);
@@ -165,22 +181,13 @@ class Insert_xls {
          $objWriter->save('../otchet/otchet.xls');
          
          /*переименовываем файл по дате для скачивания*/
-         $new_name = rename("../otchet/otchet.xls", "../otchet/$data.xls");
+         $new_name = rename("../otchet/otchet.xls", "../otchet/otchet($data).xls");
          
-         /*@TODO Надо разобраться со скачиванием а то документ не скачивается*/
-         
-             if($new_name == true){
-             echo "($data)otchet.xls";
-                header('HTTP/1.0 200 OK');
-                header('Content-Disposition: attachment; filename="' . basename("($data)otchet.xls") . '"');
-                header('Content-Transfer-Encoding: binary');
-                header('Accept-Ranges: bytes');
-                header('Content-Length: ' . (filesize("../otchet/($data)otchet.xls")));
-                header ('Location: ' . '../otchet/('.$data.')otchet.xls');
-                        
-             
-             
+        /*передаем с помощью GET запроса на скрипт для скачивания отчета*/
+         if($new_name == true){
+                echo "/product/mvc/downoload_script_otchet/downoload.php?file=../otchet/otchet($data).xls";
          }
+         
           
            
    }

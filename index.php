@@ -27,12 +27,13 @@ error_reporting(E_ALL ^E_NOTICE);
                              <div class='buttons'>
                                  <div class="col-md-12">
                                      <div class="row">
-                                         <div class="col-md-6">
+                                         <div class="col-md-7">
                                     <button class='button_new_post'>+Добавить</button>
                                     <button class='button_del_post'>-Удалить</button>
+                                    <button class='button_new_uslovia'>Создать</button>
                                          </div>
-                                         <div class="col-md-6">
-                                    <button class='save_downoload'>Сохранить и скачать</button>
+                                         <div class="col-md-5">
+                                    <button class='save_downoload'>Сохранить</button>
                                     </div>
                                      </div>
                                  </div>
@@ -64,7 +65,7 @@ error_reporting(E_ALL ^E_NOTICE);
                                      </table>
                                          
                                     </form>
-                                </div>
+                            </div>
                           
                             <div class="table_two">
                                     <form class='form_product'  name='table' method='POST'>
@@ -97,8 +98,6 @@ error_reporting(E_ALL ^E_NOTICE);
         </main>
         <footer>
             <script src="js/jquery.js" type="text/javascript"></script>
-            <script src="js/fancybox.js"></script>
-            <script src="js/lighttabs.js"></script>
             <script src="js/main.js" type="text/javascript"></script>
         </footer>
     </body>
